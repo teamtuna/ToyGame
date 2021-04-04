@@ -1,13 +1,15 @@
 package com.csi.toygame.feature.single
 
+import com.csi.toygame.getOrAwaitValue
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
 
 class SinglePlayViewModelTest {
 
-    private lateinit var viewModel : SinglePlayViewModel
+    private lateinit var viewModel: SinglePlayViewModel
 
     @Before
     fun setUp() {
@@ -19,14 +21,16 @@ class SinglePlayViewModelTest {
     fun tearDown() {
     }
 
-
     @Test
     fun 싱글모드가_처음_시작하게_되면_안내메세지와함께_입력값을_받도록_함() {
         //GIVEN
-
-        //WHEN
+        viewModel.gameStart()
 
         //THEN
+        Assert.assertTrue(
+            viewModel.stateSet.getOrAwaitValue().contains() &&
+                    viewModel.stateSet.getOrAwaitValue().contains())
+
     }
 
     @Test
