@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.csi.toygame
+package com.csi.toygame.base
 
 import androidx.lifecycle.Observer
 

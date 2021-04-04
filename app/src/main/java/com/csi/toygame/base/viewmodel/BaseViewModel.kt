@@ -1,11 +1,11 @@
-package com.csi.toygame.viewmodel
+package com.csi.toygame.base.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import com.csi.toygame.Command
-import com.csi.toygame.Event
-import com.csi.toygame.StateSet
+import com.csi.toygame.base.Command
+import com.csi.toygame.base.Event
+import com.csi.toygame.base.StateSet
 
 open class BaseViewModel : ViewModel() {
 

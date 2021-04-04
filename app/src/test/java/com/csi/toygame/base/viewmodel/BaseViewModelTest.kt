@@ -1,4 +1,4 @@
-package com.csi.toygame.viewmodel
+package com.csi.toygame.base.viewmodel
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

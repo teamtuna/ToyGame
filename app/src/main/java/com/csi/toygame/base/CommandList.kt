@@ -1,4 +1,4 @@
-package com.csi.toygame
+package com.csi.toygame.base
 
 import android.content.Context
 

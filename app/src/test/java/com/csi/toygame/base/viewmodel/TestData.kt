@@ -1,11 +1,11 @@
-package com.csi.toygame.viewmodel
+package com.csi.toygame.base.viewmodel
 
 import android.content.Context
 import androidx.viewbinding.ViewBinding
-import com.csi.toygame.Command
-import com.csi.toygame.State
-import com.csi.toygame.StateFactory
-import com.csi.toygame.StateSet
+import com.csi.toygame.base.Command
+import com.csi.toygame.base.State
+import com.csi.toygame.base.StateFactory
+import com.csi.toygame.base.StateSet
 
 data class StubCommand(val title: String) : Command {
     override fun execute(context: Context) {
