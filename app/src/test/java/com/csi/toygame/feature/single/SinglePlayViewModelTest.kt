@@ -1,8 +1,24 @@
-package com.csi.toygame.feature
+package com.csi.toygame.feature.single
 
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
+import org.mockito.MockitoAnnotations
 
-class SinglePlayGameTest {
+class SinglePlayViewModelTest {
+
+    private lateinit var viewModel : SinglePlayViewModel
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        viewModel = SinglePlayViewModel()
+    }
+
+    @After
+    fun tearDown() {
+    }
+
 
     @Test
     fun 싱글모드가_처음_시작하게_되면_안내메세지와함께_입력값을_받도록_함() {
@@ -15,7 +31,11 @@ class SinglePlayGameTest {
 
     @Test
     fun 싱글모드에서_잘못된_숫자가_맞추려는_숫자보다_높으면_높다는_안내를_제공하고_다시_입력을_받도록_함() {
+        //GIVEN
 
+        //WHEN
+
+        //THEN
     }
 
     @Test
