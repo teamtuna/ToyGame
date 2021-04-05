@@ -1,20 +1,23 @@
 package com.csi.toygame.feature.single
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.csi.toygame.feature.single.state.GameStartState
+import com.csi.toygame.feature.single.state.SinglePlayStateFactoryImpl
 import com.csi.toygame.getOrAwaitValue
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.*
 import org.mockito.MockitoAnnotations
 
 class SinglePlayViewModelTest {
 
     private lateinit var viewModel: SinglePlayViewModel
 
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = SinglePlayViewModel()
+        viewModel = SinglePlayViewModel(SinglePlayStateFactoryImpl())
     }
 
     @After
@@ -28,8 +31,11 @@ class SinglePlayViewModelTest {
 
         //THEN
         Assert.assertTrue(
-            viewModel.stateSet.getOrAwaitValue().contains() &&
-                    viewModel.stateSet.getOrAwaitValue().contains())
+            viewModel.stateSet
+                .getOrAwaitValue()
+                .filterIsInstance(GameStartState::class.java)
+                .isNotEmpty()
+        )
 
     }
 
