@@ -1,17 +1,20 @@
 package com.csi.toygame.feature.single
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.csi.toygame.feature.single.state.GameStartState
-import com.csi.toygame.feature.single.state.SinglePlayStateFactoryImpl
-import com.csi.toygame.feature.single.state.TooHighNumberState
-import com.csi.toygame.feature.single.state.TooLowNumberState
+import com.csi.toygame.feature.single.state.*
 import com.csi.toygame.getOrAwaitValue
+import com.nhaarman.mockitokotlin2.whenever
+import junit.framework.Assert.assertEquals
 import org.junit.*
+import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class SinglePlayViewModelTest {
 
     private lateinit var viewModel: SinglePlayViewModel
+
+    @Mock
+    private lateinit var singlePlayRepository: SinglePlayRepository
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -19,7 +22,7 @@ class SinglePlayViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        viewModel = SinglePlayViewModel(SinglePlayStateFactoryImpl())
+        viewModel = SinglePlayViewModel(SinglePlayStateFactoryImpl(), singlePlayRepository)
     }
 
     @After
@@ -47,6 +50,7 @@ class SinglePlayViewModelTest {
         viewModel.gameStart()
 
         //WHEN
+        whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
         viewModel.guess(100)
 
         //THEN
@@ -64,6 +68,7 @@ class SinglePlayViewModelTest {
         viewModel.gameStart()
 
         //WHEN
+        whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
         viewModel.guess(1)
 
         //THEN
@@ -76,12 +81,27 @@ class SinglePlayViewModelTest {
     }
 
     @Test
-    fun 싱글모드에서_잘못된_숫자를_입력한만큼_입력한_숫자_카운트가_나와야_함() {
-
-    }
-
-    @Test
     fun 싱글모드에서_숫자를_맞추면_시도한_숫자를_표기하고_정답을_맞췄음을_알려야_함() {
+        //GIVEN
+        viewModel.gameStart()
 
+        //WHEN
+        whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
+        whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
+        whenever(singlePlayRepository.guess(30)).thenReturn(Guess.TooLow)
+        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct)
+        viewModel.guess(1)
+        viewModel.guess(100)
+        viewModel.guess(30)
+        viewModel.guess(50)
+
+        //THEN
+        assertEquals(
+            4,
+            viewModel.stateSet
+                .getOrAwaitValue()
+                .filterIsInstance(GameEndState::class.java)
+                .first().getTriedCount()
+        )
     }
 }

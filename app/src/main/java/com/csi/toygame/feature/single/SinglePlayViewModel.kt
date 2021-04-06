@@ -2,11 +2,11 @@ package com.csi.toygame.feature.single
 
 import com.csi.toygame.base.viewmodel.BaseViewModel
 import com.csi.toygame.feature.single.state.SinglePlayStateFactory
-import com.csi.toygame.feature.single.state.SinglePlayStateFactory.Param.GameStart
-import com.csi.toygame.feature.single.state.SinglePlayStateFactory.Param.TooHighNumber
+import com.csi.toygame.feature.single.state.SinglePlayStateFactory.Param.*
 
 class SinglePlayViewModel(
     private val singlePlayStateFactory: SinglePlayStateFactory,
+    private val singlePlayRepository: SinglePlayRepository
 ) :
     BaseViewModel() {
 
@@ -15,6 +15,11 @@ class SinglePlayViewModel(
     }
 
     fun guess(i: Int) {
-        sendState(singlePlayStateFactory.create(TooHighNumber(i)))
+        when (singlePlayRepository.guess(i)) {
+            Guess.Correct -> sendState(singlePlayStateFactory.create(GameEnd))
+            Guess.TooHigh -> sendState(singlePlayStateFactory.create(TooHighNumber(i)))
+            Guess.TooLow -> sendState(singlePlayStateFactory.create(TooLowNumber(i)))
+        }
+
     }
 }
