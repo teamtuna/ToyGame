@@ -46,7 +46,7 @@ class SinglePlayViewModelTest {
         viewModel.gameStart()
 
         //WHEN
-        viewModel.guess(1)
+        viewModel.guess(100)
 
         //THEN
         Assert.assertTrue(
@@ -55,8 +55,6 @@ class SinglePlayViewModelTest {
                 .filterIsInstance(TooHighNumberState::class.java)
                 .isNotEmpty()
         )
-
-
     }
 
     @Test
