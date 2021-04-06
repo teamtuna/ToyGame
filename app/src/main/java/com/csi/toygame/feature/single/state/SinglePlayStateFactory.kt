@@ -7,7 +7,7 @@ interface SinglePlayStateFactory : StateFactory<Param> {
 
     sealed class Param {
         object GameStart : Param()
-        object GameEnd : Param()
+        data class GameEnd(val triedCount : Int) : Param()
         data class TooLowNumber(val guessNumber: Int) : Param()
         data class TooHighNumber(val guessNumber: Int) : Param()
     }

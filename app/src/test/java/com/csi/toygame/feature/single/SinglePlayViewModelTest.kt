@@ -101,7 +101,36 @@ class SinglePlayViewModelTest {
             viewModel.stateSet
                 .getOrAwaitValue()
                 .filterIsInstance(GameEndState::class.java)
-                .first().getTriedCount()
+                .first().triedCount
+        )
+    }
+
+    @Test
+    fun 싱글모드에서_숫자를_맞추고_다시게임을_시작하면_게임이_다시_리셋되서_처음으로_돌아온것으로_인지() {
+        //GIVEN
+        viewModel.gameStart()
+
+        //WHEN
+        whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
+        whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
+        whenever(singlePlayRepository.guess(30)).thenReturn(Guess.TooLow)
+        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct)
+        viewModel.guess(1)
+        viewModel.guess(100)
+        viewModel.guess(30)
+        viewModel.guess(50)
+
+
+        viewModel.gameStart()
+        viewModel.guess(50)
+
+        //THEN
+        assertEquals(
+            1,
+            viewModel.stateSet
+                .getOrAwaitValue()
+                .filterIsInstance(GameEndState::class.java)
+                .first().triedCount
         )
     }
 }
