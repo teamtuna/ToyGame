@@ -19,7 +19,10 @@ class SinglePlayViewModel(
     fun guess(i: Int) {
         triedCount++
         when (singlePlayRepository.guess(i)) {
-            Guess.Correct -> sendState(singlePlayStateFactory.create(GameEnd(triedCount)))
+            Guess.Correct -> {
+                sendState(singlePlayStateFactory.create(GameEnd(triedCount)))
+                triedCount = 0
+            }
             Guess.TooHigh -> sendState(singlePlayStateFactory.create(TooHighNumber(i)))
             Guess.TooLow -> sendState(singlePlayStateFactory.create(TooLowNumber(i)))
         }
