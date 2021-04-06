@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.csi.toygame.feature.single.state.GameStartState
 import com.csi.toygame.feature.single.state.SinglePlayStateFactoryImpl
 import com.csi.toygame.feature.single.state.TooHighNumberState
+import com.csi.toygame.feature.single.state.TooLowNumberState
 import com.csi.toygame.getOrAwaitValue
 import org.junit.*
 import org.mockito.MockitoAnnotations
@@ -59,7 +60,19 @@ class SinglePlayViewModelTest {
 
     @Test
     fun 싱글모드에서_잘못된_숫자가_맞추려는_숫자보다_낮으면_낮다는_안내를_제공하고_다시_입력을_받도록_함() {
+        //GIVEN
+        viewModel.gameStart()
 
+        //WHEN
+        viewModel.guess(1)
+
+        //THEN
+        Assert.assertTrue(
+            viewModel.stateSet
+                .getOrAwaitValue()
+                .filterIsInstance(TooLowNumberState::class.java)
+                .isNotEmpty()
+        )
     }
 
     @Test
