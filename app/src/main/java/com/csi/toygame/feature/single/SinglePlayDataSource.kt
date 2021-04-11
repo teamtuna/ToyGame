@@ -1,17 +1,24 @@
 package com.csi.toygame.feature.single
 
+import kotlin.random.Random
+
 class SinglePlayDataSource : PlayDataSource {
+    private var score: Int = 0
+
+    private var tryOnCount: Int = 0
 
     override fun generateScore() {
-        TODO("Not yet implemented")
+        score = Random.nextInt(1, 101)
     }
 
     override fun guessScore(guess: Int) {
-        TODO("Not yet implemented")
+        if (score != guess) {
+            tryOnCount++
+        }
     }
 
     override fun getTryOnCount(): Int {
-        TODO("Not yet implemented")
+        return tryOnCount
     }
 
 
