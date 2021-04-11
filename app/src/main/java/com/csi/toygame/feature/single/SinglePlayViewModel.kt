@@ -26,6 +26,5 @@ class SinglePlayViewModel(
             Guess.TooHigh -> sendState(singlePlayStateFactory.create(TooHighNumber(i)))
             Guess.TooLow -> sendState(singlePlayStateFactory.create(TooLowNumber(i)))
         }
-
     }
 }

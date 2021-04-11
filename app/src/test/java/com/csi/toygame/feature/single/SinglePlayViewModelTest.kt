@@ -69,6 +69,7 @@ class SinglePlayViewModelTest {
 
         //WHEN
         whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
+
         viewModel.guess(1)
 
         //THEN
@@ -89,11 +90,11 @@ class SinglePlayViewModelTest {
         whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
         whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
         whenever(singlePlayRepository.guess(30)).thenReturn(Guess.TooLow)
-        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct)
+        whenever(singlePlayRepository.guess(40)).thenReturn(Guess.Correct)
         viewModel.guess(1)
         viewModel.guess(100)
         viewModel.guess(30)
-        viewModel.guess(50)
+        viewModel.guess(40)
 
         //THEN
         assertEquals(
