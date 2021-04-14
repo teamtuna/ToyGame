@@ -4,5 +4,5 @@ sealed class Guess {
     object CantGuess : Guess()
     object TooLow : Guess()
     object TooHigh : Guess()
-    object Correct : Guess()
+    data class Correct(val triedCount : Int) : Guess()
 }

@@ -10,21 +10,18 @@ class SinglePlayViewModel(
 ) :
     BaseViewModel() {
 
-    private var triedCount = 0
-
     fun gameStart() {
         sendState(singlePlayStateFactory.create(GameStart))
     }
 
     fun guess(i: Int) {
-        triedCount++
-        when (singlePlayRepository.guess(i)) {
-            Guess.Correct -> {
-                sendState(singlePlayStateFactory.create(GameEnd(triedCount)))
-                triedCount = 0
+        when (val guess = singlePlayRepository.guess(i)) {
+            is Guess.Correct -> {
+                sendState(singlePlayStateFactory.create(GameEnd(guess.triedCount)))
             }
-            Guess.TooHigh -> sendState(singlePlayStateFactory.create(TooHighNumber(i)))
-            Guess.TooLow -> sendState(singlePlayStateFactory.create(TooLowNumber(i)))
+            is Guess.TooHigh -> sendState(singlePlayStateFactory.create(TooHighNumber(i)))
+            is Guess.TooLow -> sendState(singlePlayStateFactory.create(TooLowNumber(i)))
+            Guess.CantGuess -> TODO()
         }
     }
 }

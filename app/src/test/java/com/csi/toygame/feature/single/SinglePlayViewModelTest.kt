@@ -90,7 +90,7 @@ class SinglePlayViewModelTest {
         whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
         whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
         whenever(singlePlayRepository.guess(30)).thenReturn(Guess.TooLow)
-        whenever(singlePlayRepository.guess(40)).thenReturn(Guess.Correct)
+        whenever(singlePlayRepository.guess(40)).thenReturn(Guess.Correct(4))
         viewModel.guess(1)
         viewModel.guess(100)
         viewModel.guess(30)
@@ -115,7 +115,7 @@ class SinglePlayViewModelTest {
         whenever(singlePlayRepository.guess(1)).thenReturn(Guess.TooLow)
         whenever(singlePlayRepository.guess(100)).thenReturn(Guess.TooHigh)
         whenever(singlePlayRepository.guess(30)).thenReturn(Guess.TooLow)
-        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct)
+        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct(4))
         viewModel.guess(1)
         viewModel.guess(100)
         viewModel.guess(30)
@@ -123,6 +123,7 @@ class SinglePlayViewModelTest {
 
 
         viewModel.gameStart()
+        whenever(singlePlayRepository.guess(50)).thenReturn(Guess.Correct(1))
         viewModel.guess(50)
 
         //THEN

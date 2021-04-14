@@ -2,7 +2,7 @@ package com.csi.toygame.feature.single
 
 import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -93,7 +93,7 @@ class SinglePlayDataSourceTest {
         val actual = singlePlayDataSource.guessScore(50)
 
         // THEN
-        assertThat(actual, equalTo(Guess.Correct))
+        assertThat(actual, instanceOf(Guess.Correct::class.java))
     }
 
     @Test
@@ -105,6 +105,22 @@ class SinglePlayDataSourceTest {
 
         // THEN
         assertThat(actual, equalTo(Guess.CantGuess))
+    }
+
+    @Test
+    fun GuessCount가_시도한_횟수만큼_나와야한다() {
+        // GIVEN
+        whenever(generator.generate()).thenReturn(50)
+        singlePlayDataSource.generateScore()
+        // WHEN
+        singlePlayDataSource.guessScore(10)
+        singlePlayDataSource.guessScore(20)
+        singlePlayDataSource.guessScore(30)
+        val actual = singlePlayDataSource.guessScore(50)
+
+        // THEN
+        assertThat(actual, instanceOf(Guess.Correct::class.java))
+        assertThat((actual as Guess.Correct).triedCount, equalTo(3))
     }
 
 

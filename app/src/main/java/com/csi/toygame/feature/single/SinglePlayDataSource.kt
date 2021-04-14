@@ -19,7 +19,7 @@ class SinglePlayDataSource(
 
         return when (compareValues(score, guess)) {
             1 -> Guess.TooLow
-            0 -> Guess.Correct
+            0 -> Guess.Correct(tryOnCount)
             else -> Guess.TooHigh
         }.also {
             checkTryOnCount(it)
@@ -32,7 +32,7 @@ class SinglePlayDataSource(
 
     private fun checkTryOnCount(guessResult: Guess) {
         when (guessResult) {
-            Guess.Correct -> tryOnCount = 0
+            is Guess.Correct -> tryOnCount = 0
             else -> tryOnCount++
         }
     }
