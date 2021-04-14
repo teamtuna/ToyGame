@@ -1,6 +1,9 @@
 package com.csi.toygame.feature.single
 
-class SinglePlayDataSource(private val generator: PositiveRandomNumberGenerator) : PlayDataSource {
+class SinglePlayDataSource(
+    private val generator: PositiveRandomNumberGenerator,
+    private val gameRule: GameRule
+) : PlayDataSource {
     private var score: Int = 0
 
     private var tryOnCount: Int = 0
@@ -10,6 +13,10 @@ class SinglePlayDataSource(private val generator: PositiveRandomNumberGenerator)
     }
 
     override fun guessScore(guess: Int): Guess {
+        if (!gameRule.isCanGuessNumber(score, guess)) {
+            return Guess.CantGuess
+        }
+
         return when (compareValues(score, guess)) {
             1 -> Guess.TooLow
             0 -> Guess.Correct

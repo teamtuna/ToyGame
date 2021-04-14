@@ -44,13 +44,4 @@ class SinglePlayRepositryTest {
 
         assertThat(actual, Matchers.equalTo(Guess.TooLow))
     }
-
-
-    @Test
-    fun gameStart전_guess시_진행불가능하다는_결과를_받도록_한다() {
-        val actual = singlePlayRepository.guess(50)
-
-        assertThat(actual, Matchers.equalTo(Guess.CantGuess))
-    }
-
 }

@@ -19,7 +19,7 @@ class SinglePlayDataSourceTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        singlePlayDataSource = SinglePlayDataSource(generator)
+        singlePlayDataSource = SinglePlayDataSource(generator, SingleGameRule())
     }
 
     @After
@@ -94,6 +94,17 @@ class SinglePlayDataSourceTest {
 
         // THEN
         assertThat(actual, equalTo(Guess.Correct))
+    }
+
+    @Test
+    fun 정답이_generate안된경우_Guess가_안되도록_한다() {
+        // GIVEN
+
+        // WHEN
+        val actual = singlePlayDataSource.guessScore(50)
+
+        // THEN
+        assertThat(actual, equalTo(Guess.CantGuess))
     }
 
 
