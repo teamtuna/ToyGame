@@ -1,24 +1,33 @@
 package com.csi.toygame.feature.single
 
-import kotlin.random.Random
-
-class SinglePlayDataSource : PlayDataSource {
+class SinglePlayDataSource(private val generator: PositiveRandomNumberGenerator) : PlayDataSource {
     private var score: Int = 0
 
     private var tryOnCount: Int = 0
 
     override fun generateScore() {
-        score = Random.nextInt(1, 101)
+        score = generator.generate()
     }
 
-    override fun guessScore(guess: Int) {
-        if (score != guess) {
-            tryOnCount++
+    override fun guessScore(guess: Int): Guess {
+        return when (compareValues(score, guess)) {
+            1 -> Guess.TooLow
+            0 -> Guess.Correct
+            else -> Guess.TooHigh
+        }.also {
+            checkTryOnCount(it)
         }
     }
 
     override fun getTryOnCount(): Int {
         return tryOnCount
+    }
+
+    private fun checkTryOnCount(guessResult: Guess) {
+        when (guessResult) {
+            Guess.Correct -> tryOnCount = 0
+            else -> tryOnCount++
+        }
     }
 
 
