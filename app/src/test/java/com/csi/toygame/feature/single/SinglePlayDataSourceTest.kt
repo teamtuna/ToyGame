@@ -1,5 +1,6 @@
 package com.csi.toygame.feature.single
 
+import com.csi.toygame.domain.Guess
 import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*

@@ -1,40 +1,28 @@
 package com.csi.toygame.feature.single
 
+import com.csi.toygame.domain.Game
+import com.csi.toygame.domain.Guess
+
 class SinglePlayDataSource(
     private val generator: PositiveRandomNumberGenerator,
     private val gameRule: GameRule
 ) : PlayDataSource {
-    private var score: Int = 0
-
-    private var tryOnCount: Int = 0
+    private lateinit var currentGame: Game
 
     override fun generateScore() {
-        score = generator.generate()
+        currentGame = Game(generator.generate())
     }
 
     override fun guessScore(guess: Int): Guess {
-        if (!gameRule.isCanGuessNumber(score, guess)) {
+        if (!::currentGame.isInitialized || !gameRule.isCanGuessNumber(currentGame.score, guess)) {
             return Guess.CantGuess
         }
 
-        return when (compareValues(score, guess)) {
-            1 -> Guess.TooLow
-            0 -> Guess.Correct(tryOnCount)
-            else -> Guess.TooHigh
-        }.also {
-            checkTryOnCount(it)
-        }
+        return currentGame.guess(guess)
     }
 
     override fun getTryOnCount(): Int {
-        return tryOnCount
-    }
-
-    private fun checkTryOnCount(guessResult: Guess) {
-        when (guessResult) {
-            is Guess.Correct -> tryOnCount = 0
-            else -> tryOnCount++
-        }
+        return currentGame.tryOnCount
     }
 
 

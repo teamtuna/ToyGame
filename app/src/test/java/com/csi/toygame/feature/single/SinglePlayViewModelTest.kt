@@ -1,6 +1,7 @@
 package com.csi.toygame.feature.single
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.csi.toygame.domain.Guess
 import com.csi.toygame.feature.single.state.*
 import com.csi.toygame.getOrAwaitValue
 import com.nhaarman.mockitokotlin2.whenever

@@ -1,5 +1,6 @@
 package com.csi.toygame.feature.single
 
+import com.csi.toygame.domain.Guess
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
