@@ -1,6 +1,6 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.domain.repository
 
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.domain.model.Guess
 
 interface SinglePlayRepository {
     fun guess(i: Int) : Guess

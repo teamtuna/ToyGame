@@ -1,7 +1,8 @@
 package com.csi.toygame.feature.single
 
 import com.csi.toygame.base.viewmodel.BaseViewModel
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.domain.model.Guess
+import com.csi.toygame.domain.repository.SinglePlayRepository
 import com.csi.toygame.feature.single.state.SinglePlayStateFactory
 import com.csi.toygame.feature.single.state.SinglePlayStateFactory.Param.*
 

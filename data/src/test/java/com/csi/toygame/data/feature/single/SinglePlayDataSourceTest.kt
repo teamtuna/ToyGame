@@ -1,6 +1,6 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data.feature.single
 
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.domain.model.Guess
 import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
@@ -12,15 +12,18 @@ import org.mockito.MockitoAnnotations
 
 class SinglePlayDataSourceTest {
 
-    private lateinit var singlePlayDataSource: PlayDataSource
+    private lateinit var singlePlayDataSource: com.csi.toygame.data.PlayDataSource
 
     @Mock
-    private lateinit var generator: PositiveRandomNumberGenerator
+    private lateinit var generator: com.csi.toygame.data.PositiveRandomNumberGenerator
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        singlePlayDataSource = SinglePlayDataSource(generator, SingleGameRule())
+        singlePlayDataSource = com.csi.toygame.data.SinglePlayDataSource(
+            generator,
+            com.csi.toygame.data.SingleGameRule()
+        )
     }
 
     @After

@@ -1,12 +1,13 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data.feature.single
 
+import com.csi.toygame.domain.model.GameRule
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.Test
 
 class SingleGameRuleTest {
 
-    private val gameRule: GameRule = SingleGameRule()
+    private val gameRule: GameRule = com.csi.toygame.data.SingleGameRule()
 
     @Test
     fun 게임룰_1부터_100까지_안에_숫자가_속해있지않으면_게임룰에_어긋나는것으로_판단된다() {

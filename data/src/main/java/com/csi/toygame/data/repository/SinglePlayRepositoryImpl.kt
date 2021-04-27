@@ -1,6 +1,8 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data.repository
 
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.data.SinglePlayDataSource
+import com.csi.toygame.domain.model.Guess
+import com.csi.toygame.domain.repository.SinglePlayRepository
 
 class SinglePlayRepositoryImpl(private val singlePlayDataSource: SinglePlayDataSource) :
     SinglePlayRepository {

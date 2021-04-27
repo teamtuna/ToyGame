@@ -1,4 +1,4 @@
-package com.csi.toygame.domain
+package com.csi.toygame.domain.model
 
 sealed class Guess {
     object CantGuess : Guess()

@@ -1,7 +1,8 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data
 
-import com.csi.toygame.domain.Game
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.domain.model.Game
+import com.csi.toygame.domain.model.GameRule
+import com.csi.toygame.domain.model.Guess
 
 class SinglePlayDataSource(
     private val generator: PositiveRandomNumberGenerator,

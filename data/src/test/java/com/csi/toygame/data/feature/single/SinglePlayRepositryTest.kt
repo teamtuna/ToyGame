@@ -1,6 +1,8 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data.feature.single
 
-import com.csi.toygame.domain.Guess
+import com.csi.toygame.data.repository.SinglePlayRepositoryImpl
+import com.csi.toygame.domain.model.Guess
+import com.csi.toygame.domain.repository.SinglePlayRepository
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -16,7 +18,7 @@ class SinglePlayRepositryTest {
     private lateinit var singlePlayRepository: SinglePlayRepository
 
     @Mock
-    private lateinit var singlePlayDataSource: SinglePlayDataSource
+    private lateinit var singlePlayDataSource: com.csi.toygame.data.SinglePlayDataSource
 
     @Before
     fun setUp() {

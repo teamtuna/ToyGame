@@ -1,4 +1,4 @@
-package com.csi.toygame.feature.single
+package com.csi.toygame.data
 
 import kotlin.random.Random
 

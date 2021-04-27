@@ -1,4 +1,4 @@
-package com.csi.toygame.domain
+package com.csi.toygame.domain.model
 
 data class Game(val score: Int) {
     private val tryNumber = mutableListOf<Int>()
