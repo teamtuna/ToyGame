@@ -1,2 +1,4 @@
 include ':app'
 rootProject.name = "Toygame"
+include ':data'
+include ':domain'

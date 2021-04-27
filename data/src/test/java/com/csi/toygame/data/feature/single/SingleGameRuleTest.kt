@@ -1,0 +1,23 @@
+package com.csi.toygame.data.feature.single
+
+import com.csi.toygame.domain.model.GameRule
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.equalTo
+import org.junit.Test
+
+class SingleGameRuleTest {
+
+    private val gameRule: GameRule = com.csi.toygame.data.SingleGameRule()
+
+    @Test
+    fun 게임룰_1부터_100까지_안에_숫자가_속해있지않으면_게임룰에_어긋나는것으로_판단된다() {
+        assertThat(gameRule.isCanGuessNumber(101, 1), equalTo(false))
+        assertThat(gameRule.isCanGuessNumber(-100, 1), equalTo(false))
+    }
+
+    @Test
+    fun 게임룰_1부터_100까지_안에_숫자가_속해있으면_게임룰이_맞다는걸_판단한다() {
+        assertThat(gameRule.isCanGuessNumber(99, 1), equalTo(true))
+        assertThat(gameRule.isCanGuessNumber(1, 1), equalTo(true))
+    }
+}
