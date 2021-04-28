@@ -1,6 +1,8 @@
 package com.csi.toygame.data.feature.single
 
+import com.csi.toygame.data.SinglePlayDataSource
 import com.csi.toygame.data.repository.SinglePlayRepositoryImpl
+import com.csi.toygame.domain.model.Game
 import com.csi.toygame.domain.model.Guess
 import com.csi.toygame.domain.repository.SinglePlayRepository
 import com.nhaarman.mockitokotlin2.any
@@ -18,7 +20,7 @@ class SinglePlayRepositryTest {
     private lateinit var singlePlayRepository: SinglePlayRepository
 
     @Mock
-    private lateinit var singlePlayDataSource: com.csi.toygame.data.SinglePlayDataSource
+    private lateinit var singlePlayDataSource: SinglePlayDataSource
 
     @Before
     fun setUp() {
@@ -35,15 +37,16 @@ class SinglePlayRepositryTest {
         singlePlayRepository.gameStart()
 
 
-        verify(singlePlayDataSource).generateScore()
+        verify(singlePlayDataSource).generateGame()
     }
 
     @Test
     fun gameStart후_guess시_Guess_결과값을_반환한다() {
-        singlePlayRepository.gameStart()
-        whenever(singlePlayDataSource.guessScore(any())).thenReturn(Guess.TooLow)
+        whenever(singlePlayDataSource.generateGame()).thenReturn(Game("1", 3))
+        val game = singlePlayRepository.gameStart()
+        whenever(singlePlayDataSource.guessScore(game.id, 50)).thenReturn(Guess.TooLow)
 
-        val actual = singlePlayRepository.guess(50)
+        val actual = singlePlayRepository.guess(game.id, 50)
 
         assertThat(actual, Matchers.equalTo(Guess.TooLow))
     }

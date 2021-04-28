@@ -1,11 +1,12 @@
 package com.csi.toygame.data
 
+import com.csi.toygame.domain.model.Game
 import com.csi.toygame.domain.model.Guess
 
 interface PlayDataSource {
-    fun generateScore()
+    fun generateGame() : Game
 
-    fun guessScore(guess: Int) : Guess
+    fun guessScore(id : String, guess: Int) : Guess
 
-    fun getTryOnCount() : Int
+    fun getTryOnCount(id : String) : Int
 }

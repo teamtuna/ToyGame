@@ -1,6 +1,6 @@
 package com.csi.toygame.domain.model
 
-data class Game(val score: Int) {
+data class Game(val id: String, val score: Int) {
     private val tryNumber = mutableListOf<Int>()
 
     val tryOnCount: Int
